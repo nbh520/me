@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/example.css"/>
+	</head>
+	<body>
+		<div id="star">
+			
+		</div>
+		
+		<script>
+			var BodyWidth = document.body.offsetWidth;
+			var BodyHeight = document.body.offsetHeight;
+			var StarDom = document.getElementById("star");
+			console.log(BodyHeight)
+			function Star(){
+				this.x = this.randomNum(0,BodyWidth);
+				this.y = BodyHeight;
+				this.width =  this.randomNum(15,64);
+				this.height = this.width / 64 * 143;
+				this.speed = this.randomNum(3,10);
+				this.opacity = this.randomNum(0.3,1);
+//				this.init();
+			}
+			Star.prototype = {
+				init : function(){
+					this.createNode();
+				},
+				createNode : function(){
+					var img = new Image();
+					img.src = "../img/liuxing.png";
+					img.width = this.width;
+					img.height = this.height;
+					img.style.left = this.x+"px";
+					img.style.top = this.y+"px";
+//					img.style.opacity = this.opacity;
+					StarDom.appendChild(img);
+					return img;
+				},
+				randomNum : function(min,max){
+					return Math.random() * (max - min ) + min;  
+				}
+			}
+			var StarArr = [];
+			for(let i = 0 ; i < 30 ; i++){
+//				StarArr[i].Object = new Star();
+//				StarArr[i].Dom = StarArr[i].Object.createNode();
+				var Object ={Object:new Star()} ;
+				Object.Dom  = Object.Object.createNode();
+			}
+//			console.log(StarArr[2])
+//			setInterval(function(){
+//				for(let i = 0 ; i < StarArr.length ; i++){
+//					StarArr[i].style.left = StarArr[i].offsetLeft - StarArr[i].speed + 'px';
+//					StarArr[i].style.top = StarArr[i].offsetTop - StarArr[i].speed + 'px';
+//					console.log(StarArr[i])
+//				}
+//			}, 3000)
+		</script>
+	</body>
+</html>
