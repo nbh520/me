@@ -17,12 +17,12 @@
 			 * 星星对象，x,y坐标，宽度，长度，移动速度，透明值，生成dom元素
 			 */
 			function Star(){
-				this.x = this.randomNum(0,BodyWidth);
-				this.y = BodyHeight + this.randomNum(100,500);
+				this.x = this.randomNum(0,BodyWidth*2);
+				this.y = BodyHeight + this.randomNum(0,BodyHeight);
 				this.width =  this.randomNum(15,64);
 				this.height = this.width / 64 * 143;
 				this.speed = this.randomNum(3,5);
-				this.opacity = this.randomNum(0.3,1);
+				this.opacity = this.randomNum(0.5,1);
 				this.dom = this.createNode();
 			}
 			Star.prototype = {
@@ -42,24 +42,32 @@
 				}
 			}
 			var StarArr = [];
-			
 			/*
 			 * 生成若干个星星
 			 */
-			for(let i = 0 ; i < 30 ; i++){
-				StarArr[i] = {obj:new Star()};
+			for(let i = 0 ; i < 20 ; i++){
+				StarArr[i] = {
+					obj : new Star()
+					};
 			}
 			/*
 			 * 
 			 * 每次刷新都重新对星星坐标进行绘制
 			 */
-			setInterval(function(){
+			function StarMove(){
 				for(let i = 0 ; i < StarArr.length ; i++){
-					StarArr[i].obj.dom.style.top = StarArr[i].obj.dom.offsetTop - StarArr[i].obj.speed +'px';
-					StarArr[i].obj.dom.style.left = StarArr[i].obj.dom.offsetLeft - (StarArr[i].obj.speed  / 2)+'px';
-				
+					if(StarArr[i].obj.dom.offsetTop < -(StarArr[i].obj.height) || 
+									StarArr[i].obj.dom.offsetLeft < -(StarArr[i].obj.width)){
+						StarDom.removeChild(StarArr[i].obj.dom);
+						StarArr[i] = {obj:new Star()};
+					}else{
+						StarArr[i].obj.dom.style.top = StarArr[i].obj.dom.offsetTop - StarArr[i].obj.speed +'px';
+						StarArr[i].obj.dom.style.left = StarArr[i].obj.dom.offsetLeft - (StarArr[i].obj.speed  / 2)+'px';
+					}
 				}
-			}, 1000 / 60)
+				window.requestAnimationFrame(StarMove);
+			}
+			window.requestAnimationFrame(StarMove);
 		</script>
 	</body>
 </html>
