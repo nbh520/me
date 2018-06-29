@@ -6,28 +6,26 @@
 		<link rel="stylesheet" type="text/css" href="../css/example.css"/>
 	</head>
 	<body>
-		<div id="star">
-			
-		</div>
+		<div id="star"></div>
 		
 		<script>
 			var BodyWidth = document.body.offsetWidth;
 			var BodyHeight = document.body.offsetHeight;
 			var StarDom = document.getElementById("star");
-			console.log(BodyHeight)
+			
+			/*
+			 * 星星对象，x,y坐标，宽度，长度，移动速度，透明值，生成dom元素
+			 */
 			function Star(){
 				this.x = this.randomNum(0,BodyWidth);
-				this.y = BodyHeight;
+				this.y = BodyHeight + this.randomNum(100,500);
 				this.width =  this.randomNum(15,64);
 				this.height = this.width / 64 * 143;
-				this.speed = this.randomNum(3,10);
+				this.speed = this.randomNum(3,5);
 				this.opacity = this.randomNum(0.3,1);
-//				this.init();
+				this.dom = this.createNode();
 			}
 			Star.prototype = {
-				init : function(){
-					this.createNode();
-				},
 				createNode : function(){
 					var img = new Image();
 					img.src = "../img/liuxing.png";
@@ -35,7 +33,7 @@
 					img.height = this.height;
 					img.style.left = this.x+"px";
 					img.style.top = this.y+"px";
-//					img.style.opacity = this.opacity;
+					img.style.opacity = this.opacity;
 					StarDom.appendChild(img);
 					return img;
 				},
@@ -44,20 +42,24 @@
 				}
 			}
 			var StarArr = [];
+			
+			/*
+			 * 生成若干个星星
+			 */
 			for(let i = 0 ; i < 30 ; i++){
-//				StarArr[i].Object = new Star();
-//				StarArr[i].Dom = StarArr[i].Object.createNode();
-				var Object ={Object:new Star()} ;
-				Object.Dom  = Object.Object.createNode();
+				StarArr[i] = {obj:new Star()};
 			}
-//			console.log(StarArr[2])
-//			setInterval(function(){
-//				for(let i = 0 ; i < StarArr.length ; i++){
-//					StarArr[i].style.left = StarArr[i].offsetLeft - StarArr[i].speed + 'px';
-//					StarArr[i].style.top = StarArr[i].offsetTop - StarArr[i].speed + 'px';
-//					console.log(StarArr[i])
-//				}
-//			}, 3000)
+			/*
+			 * 
+			 * 每次刷新都重新对星星坐标进行绘制
+			 */
+			setInterval(function(){
+				for(let i = 0 ; i < StarArr.length ; i++){
+					StarArr[i].obj.dom.style.top = StarArr[i].obj.dom.offsetTop - StarArr[i].obj.speed +'px';
+					StarArr[i].obj.dom.style.left = StarArr[i].obj.dom.offsetLeft - (StarArr[i].obj.speed  / 2)+'px';
+				
+				}
+			}, 1000 / 60)
 		</script>
 	</body>
 </html>
