@@ -2,11 +2,27 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>ME</title>
-		<link rel="stylesheet" type="text/css" href="../css/example.css"/>
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+				background: black;
+				overflow: hidden;
+			}
+			.star-position{
+				position: absolute;
+				transition: all 10s linear;
+			}
+			
+		</style>
 	</head>
 	<body>
-		<div id="star"></div>
+			<div id="star"></div>
 		
 		<script>
 			var BodyWidth = document.body.offsetWidth;
@@ -22,6 +38,7 @@
 				this.width =  this.randomNum(15,64);
 				this.height = this.width / 64 * 143;
 				this.speed = this.randomNum(3,5);
+				this.k = this.y - (this.height / this.width) * this.x + (this.width * this.height / this.width);
 				this.opacity = this.randomNum(0.5,1);
 				this.dom = this.createNode();
 			}
@@ -34,6 +51,7 @@
 					img.style.left = this.x+"px";
 					img.style.top = this.y+"px";
 					img.style.opacity = this.opacity;
+					img.className = "star-position";
 					StarDom.appendChild(img);
 					return img;
 				},
@@ -42,32 +60,26 @@
 				}
 			}
 			var StarArr = [];
-			/*
-			 * 生成若干个星星
-			 */
-			for(let i = 0 ; i < 20 ; i++){
-				StarArr[i] = {
-					obj : new Star()
-					};
+			for(let i = 0 ; i < 50 ; i++){ //生成若干星星
+				StarArr[i] = new Star();
 			}
 			/*
 			 * 
 			 * 每次刷新都重新对星星坐标进行绘制
 			 */
-			function StarMove(){
+			setInterval(function(){
 				for(let i = 0 ; i < StarArr.length ; i++){
-					if(StarArr[i].obj.dom.offsetTop < -(StarArr[i].obj.height) || 
-									StarArr[i].obj.dom.offsetLeft < -(StarArr[i].obj.width)){
-						StarDom.removeChild(StarArr[i].obj.dom);
-						StarArr[i] = {obj:new Star()};
+					if(StarArr[i].dom.offsetTop <= -(StarArr[i].height) || 
+									StarArr[i].dom.offsetLeft <= -(StarArr[i].width)){
+						StarDom.removeChild(StarArr[i].dom);
+						StarArr[i] = new Star();
 					}else{
-						StarArr[i].obj.dom.style.top = StarArr[i].obj.dom.offsetTop - StarArr[i].obj.speed +'px';
-						StarArr[i].obj.dom.style.left = StarArr[i].obj.dom.offsetLeft - (StarArr[i].obj.speed  / 2)+'px';
+						StarArr[i].dom.style.top = StarArr[i].k -1 + 'px' ;
+						StarArr[i].dom.style.left =  -1 * StarArr[i].width -1 + 'px';
 					}
 				}
-				window.requestAnimationFrame(StarMove);
-			}
-			window.requestAnimationFrame(StarMove);
+			},1000);
+			
 		</script>
 	</body>
 </html>
