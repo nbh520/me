@@ -43,11 +43,15 @@ table {
 html,body{
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 .wrap{
 	width: 100%;
 	height: 100%;
 	position: relative;
+	transition: all 1s linear;
+	top: 0;
+	left: 0;
 	background: aquamarine;
 }
 .one{
@@ -55,7 +59,7 @@ html,body{
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 100%;
+	top: 0;
 	background: khaki;
 }
 .two{
@@ -63,7 +67,7 @@ html,body{
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 200%;
+	top: 100%;
 	background: antiquewhite;
 }
 .three{
@@ -71,6 +75,14 @@ html,body{
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 300%;
+	top: 200%;
 	background: palegreen;
+}
+.four{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 300%;
+	background: cornflowerblue;
 }

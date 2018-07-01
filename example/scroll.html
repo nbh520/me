@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="one">
+				<div id="star"></div>
+			</div>
+			<div class="two"></div>
+			<div class="three"></div>
+			<div class="four"></div>
+		</div>
+		<script type="text/javascript">
+			(function(){
+				var box = document.querySelector('.wrap');
+				var child = box.children;
+				var i = -1;
+				Array.prototype.forEach.call(child,function(el,index){
+					el.onclick = function(){
+						box.style.top = i + "00%";
+					}
+				})
+			})()
+		</script>
+	</body>
+</html>
