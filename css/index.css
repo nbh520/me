@@ -107,8 +107,11 @@ html,body{
 	z-index: 1;
 	left: 216px;
 	top: 464px;
-	transform-origin:60px 60px;
-	animation:header-ani 16s ease infinite;
+	-webkit-transform-origin:60px 60px;
+	    -ms-transform-origin:60px 60px;
+	        transform-origin:60px 60px;
+	-webkit-animation:header-ani 16s ease infinite;
+	        animation:header-ani 16s ease infinite;
 }
 .man-body{
 	position: absolute;
@@ -116,21 +119,48 @@ html,body{
 	left: 235px;
 	top: 510px;
 }
-@keyframes header-ani{
+@-webkit-keyframes header-ani{
 	0%{
-		transform:rotate(0deg);
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
 	}
 	40%{
-		transform:rotate(-20deg);
+		-webkit-transform:rotate(-20deg);
+		        transform:rotate(-20deg);
 	}
 	60%{
-		transform:rotate(0deg);
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
 	}
 	80%{
-		transform:rotate(20deg);
+		-webkit-transform:rotate(20deg);
+		        transform:rotate(20deg);
 	}
 	100%{
-		transform:rotate(0deg);
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
+	}
+}
+@keyframes header-ani{
+	0%{
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
+	}
+	40%{
+		-webkit-transform:rotate(-20deg);
+		        transform:rotate(-20deg);
+	}
+	60%{
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
+	}
+	80%{
+		-webkit-transform:rotate(20deg);
+		        transform:rotate(20deg);
+	}
+	100%{
+		-webkit-transform:rotate(0deg);
+		        transform:rotate(0deg);
 	}
 }
 .wait{
@@ -153,4 +183,5 @@ html,body{
 	color:rgba(238,238,238,.8);
 	font-weight:normal;
 	font-size:22px;
+	margin-top: 10px;
 }
