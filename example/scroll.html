@@ -13,19 +13,33 @@
 			<div class="two"></div>
 			<div class="three"></div>
 			<div class="four"></div>
+			<div class="five"></div>
 		</div>
 		<script type="text/javascript">
-			(function(){
-				var box = document.querySelector('.wrap');
-				var child = box.children;
-				var i = -1;
-				Array.prototype.forEach.call(child,function(el,index){
-					el.onclick = function(){
-						box.style.top = i + "00%";
-						i--;
+			(function() {
+				var box = document.querySelector('.wrap'); //获取整个大盒子
+				var child = box.children;  // 获取每个分页HTMLcollection
+				var page = 0;
+				var startTime = 0;
+				
+				//滚动条事件
+				Array.prototype.forEach.call(child, function(el, index) {
+					window.onmousewheel = function(e){
+						var now = new Date();
+						overtTime = now.getTime();
+						if(overtTime - startTime > 1000){   // 设置滚动间隔的时间
+							if(e.wheelDelta > 0 && page < 0){
+								page++;
+								box.style.top = page  + "00%";
+							}else if(e.wheelDelta < 0 && page > -4){
+								page--;
+								box.style.top = page + "00%";
+							}
+							startTime = now.getTime();
+						}
 					}
 				})
-			})()
+			})();
 		</script>
 	</body>
 </html>
