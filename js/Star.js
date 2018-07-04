@@ -38,7 +38,7 @@ Star.prototype = {
 	}
 }
 var StarArr = [];
-for(let i = 0; i < 50; i++) { //生成若干星星
+for(let i = 0; i < 100; i++) { //生成若干星星
 	StarArr[i] = new Star();
 }
 /*
