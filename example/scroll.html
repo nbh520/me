@@ -39,7 +39,29 @@
 						}
 					}
 				})
-			})();
+				
+				box.onmousedown = function(e){
+					"use strict"
+					var clickX = e.clientX;
+					var clickY = e.clientY;
+					this.onmousemove = function(e){
+						var newClickX = e.clientX - clickX;
+						var newClickY = e.clientY - clickY;
+						if(newClickY < 0){
+							console.log('向下');
+						}else if(newClickY > 0){
+							console.log('向上`{newClickX}`');
+						}
+						clickX = e.clientX;
+						clickY = e.clientY;
+					}
+					this.onmouseup = function(){
+						this.onmousemove = null;
+					}
+				}
+				
+				
+			})()
 		</script>
 	</body>
 </html>
